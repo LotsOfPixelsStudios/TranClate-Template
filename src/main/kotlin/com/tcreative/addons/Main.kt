@@ -65,7 +65,7 @@ fun main() {
                 ),
                 selector = "@a",
                 exitOnJumpOrCrouch = true,
-                onExit = "/function exit_fun"
+                onExit = arrayListOf("/function exit_fun")
             )
         }
     }
