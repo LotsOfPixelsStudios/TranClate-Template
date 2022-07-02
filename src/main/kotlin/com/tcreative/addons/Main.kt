@@ -57,16 +57,16 @@ fun main() {
             }
         }
         cameraTracks(this) {
-            addCameraTrack(
-                "a_to_b",
-                arrayListOf(
+            addCameraTrack {
+                identifier = "a_to_b"
+                values = arrayListOf(
                     Pair(Coordinate(0f, -50f, 0f, 0f, 0f), 0f),
                     Pair(Coordinate(10f, -50f, 0f, 20f, 0f), 5f)
-                ),
-                selector = "@a",
-                exitOnJumpOrCrouch = true,
+                )
+                selector = "@a"
+                exitOnJumpOrCrouch = true
                 onExit = arrayListOf("/function exit_fun")
-            )
+            }
         }
     }
 
