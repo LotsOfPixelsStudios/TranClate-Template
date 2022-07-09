@@ -2,7 +2,9 @@ package com.tcreative.addons
 
 import com.tcreative.devtools.stdlib.cameratrack.Coordinate
 import com.tcreative.devtools.stdlib.cameratrack.cameraTracks
+import com.tcreative.devtools.stdlib.commands.Selector
 import com.tcreative.devtools.stdlib.statesys.stateSystem
+import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
 import com.tcreative.devtools.tranclate.builder.getResource
 import com.tcreative.devtools.tranclate.builder.zipper.zipProject
 import com.tcreative.devtools.tranclate.systemaddon.addon
@@ -28,7 +30,7 @@ fun main() {
         projectShort = "tp",
         description = "",
         packIcon = getResource("general/pack.png"),
-        world = getResource("world/template-world"),
+        world = getResource("world/template-world").modifyTemplateWorldName("Template"),
         version = arrayListOf(1, 0, 0)
     ) {
         packageAddon = false
@@ -63,7 +65,7 @@ fun main() {
                     Pair(Coordinate(0f, -50f, 0f, 0f, 0f), 0f),
                     Pair(Coordinate(10f, -50f, 0f, 20f, 0f), 5f)
                 )
-                selector = "@a"
+                selector = Selector.a.toString()
                 exitOnJumpOrCrouch = true
                 onExit = arrayListOf("/function exit_fun")
             }
