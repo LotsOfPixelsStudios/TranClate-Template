@@ -3,6 +3,8 @@ package com.tcreative.addons
 import com.tcreative.devtools.stdlib.cameratrack.Coordinate
 import com.tcreative.devtools.stdlib.cameratrack.cameraTracks
 import com.tcreative.devtools.stdlib.commands.Selector
+import com.tcreative.devtools.stdlib.furnitures.furniture
+import com.tcreative.devtools.stdlib.player.Player
 import com.tcreative.devtools.stdlib.statesys.stateSystem
 import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
 import com.tcreative.devtools.tranclate.builder.getResource
@@ -69,6 +71,13 @@ fun main() {
                 exitOnJumpOrCrouch = true
                 onExit = arrayListOf("/function exit_fun")
             }
+        }
+        Player
+            .modify(this)
+            .modifyBehaviour {  }
+
+        furniture("vase", "Vase", this) {
+
         }
     }
 
