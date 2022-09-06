@@ -33,7 +33,14 @@ fun main() {
         world = getResource("world/template-world").modifyTemplateWorldName("Template"),
         version = arrayListOf(1, 0, 0)
     ) {
-        packageAddon = false
+        packageAddonCustom {
+            this.world = getResource("world/template-world")
+            addSkinPack(validate = true, getResource("skin_pack"))
+            addStoreArt { }
+            addMarketing { }
+            addBehaviorPack { }
+            addResourcePack { }
+        }
 
         entity {
             name("sample_entity", "Sample Entity")
