@@ -1,0 +1,52 @@
+stages:
+  - run
+  - mcworld
+
+run:
+  stage: run
+  image: gradle:7-jdk17
+  tags:
+    - tranclate
+  before_script:
+    - chmod +x gradlew
+    - echo $CI_JOB_ID
+    # Writing GE_JOB_ID variable to environment file, will need the value in the next stage.
+    - echo GE_JOB_ID=$CI_JOB_ID >> generate_executables.env
+  script:
+    - ./gradlew run --args="zip-world package"
+  artifacts:
+    paths:
+      - zipVersions/*.mcworld
+      - zipVersions/*.zip
+    expire_in: 1 week
+    reports:
+      # To ensure we've access to this file in the next stage
+      dotenv: generate_executables.env
+
+mcworld:
+  stage: mcworld
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  tags:
+    - tranclate
+  script:
+    - echo 'running release_job'
+    - echo 'Previous Job ID is printed below'
+    - echo $GE_JOB_ID
+  # Specifying that this job requires artifacts from the previous job to succeed
+  needs:
+    - job: run
+      artifacts: true
+  release:
+    name: 'Release McWorld $CI_COMMIT_SHORT_SHA'
+    description: 'Created using the release-cli'
+    # tag_name is a mendatory field and can not be an empty string
+    tag_name: '$CI_COMMIT_SHORT_SHA'
+    assets:
+      links:
+        - name: 'McWorld'
+          url: 'https://git.timoliacreative.de/crackedcubes/${CI_PROJECT_NAME}/-/jobs/${GE_JOB_ID}/artifacts/file/zipVersions/${CI_PROJECT_NAME}.mcworld'
+        - name: 'Package'
+          url: 'https://git.timoliacreative.de/crackedcubes/${CI_PROJECT_NAME}/-/jobs/${GE_JOB_ID}/artifacts/file/zipVersions/${CI_PROJECT_NAME}.zip'
+  only:
+    # Can be removed if you want to trigger the pipeline for merge request or other branches
+    - master

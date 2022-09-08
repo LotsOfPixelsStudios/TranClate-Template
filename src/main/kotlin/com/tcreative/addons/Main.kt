@@ -8,10 +8,10 @@ import com.tcreative.devtools.stdlib.player.Player
 import com.tcreative.devtools.stdlib.statesys.stateSystem
 import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
 import com.tcreative.devtools.tranclate.builder.getResource
-import com.tcreative.devtools.tranclate.builder.zipper.zipProject
+import com.tcreative.devtools.tranclate.builder.zipper.zipWorld
 import com.tcreative.devtools.tranclate.systemaddon.addon
 
-fun main() {
+fun main(args: Array<String>) {
     //todo
     //---------------------------------------------------------------
     // [ ] make sure to modify addon() to loadAddon() if some json code already exist
@@ -27,7 +27,7 @@ fun main() {
     // [ ] modify packageAddon()
     //---------------------------------------------------------------
 
-    addon(
+    val properties = addon(
         projectName = "Template",
         projectShort = "tp",
         description = "",
@@ -35,20 +35,22 @@ fun main() {
         world = getResource("world/template-world").modifyTemplateWorldName("Template"),
         version = arrayListOf(1, 0, 0)
     ) {
-        packageAddonCustom {
-            this.world = getResource("world/template-world")
-            addSkinPack(validate = true, getResource("skin_pack"))
-            addStoreArt { }
-            addMarketing { }
-            addBehaviorPack { }
-            addResourcePack { }
+        if (args.contains("package")) {
+            packageAddonCustom {
+                this.world = getResource("world/template-world")
+                addSkinPack(validate = true, getResource("skin_pack"))
+                addStoreArt { }
+                addMarketing { }
+                addBehaviorPack { }
+                addResourcePack { }
+            }
         }
 
         entity {
             name("sample_entity", "Sample Entity")
             resource {
-                texture(getResource("entities/default_texture.png"))
-                geometry(getResource("entities/default_model.geo.json"))
+                textureLayer(getResource("entities/default_texture.png"))
+                geometryLayer(getResource("entities/default_model.geo.json"))
             }
             behaviour {
                 components {
@@ -81,12 +83,13 @@ fun main() {
         }
         Player
             .modify(this)
-            .modifyBehaviour {  }
+            .modifyBehaviour { }
 
         furniture("vase", "Vase", this) {
 
         }
     }
 
-    zipProject("1.0-SNAPSHOT", getResource("world/template-world"))
+    if (args.contains("zip-world"))
+        zipWorld(world = getResource("world/template-world"), properties, System.getenv("CI_PROJECT_NAME") ?: "local")
 }
