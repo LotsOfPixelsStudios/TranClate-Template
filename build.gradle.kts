@@ -38,8 +38,8 @@ application {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation(group = "com.timoliacreative", name = "tranclate", version = "2.3.0.26")
-    implementation(group = "com.timoliacreative", name = "tranclate-std-lib", version = "0.6.0.12")
+    implementation(group = "com.timoliacreative", name = "tranclate", version = "2.3.0.28")
+    implementation(group = "com.timoliacreative", name = "tranclate-std-lib", version = "0.6.0.13")
 
     //test
     testImplementation(kotlin("test"))
