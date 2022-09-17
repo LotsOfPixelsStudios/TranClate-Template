@@ -4,6 +4,7 @@ import com.tcreative.devtools.stdlib.cameratrack.Coordinate
 import com.tcreative.devtools.stdlib.cameratrack.cameraTracks
 import com.tcreative.devtools.stdlib.commands.Selector
 import com.tcreative.devtools.stdlib.furnitures.furniture
+import com.tcreative.devtools.stdlib.furnitures.shared.FurnitureDropBehaviour
 import com.tcreative.devtools.stdlib.player.Player
 import com.tcreative.devtools.stdlib.statesys.stateSystem
 import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
@@ -86,7 +87,7 @@ fun main(args: Array<String>) {
             .modifyBehaviour { }
 
         furniture("vase", "Vase", this) {
-
+            dropBehaviour = FurnitureDropBehaviour.CAN_PICKUP
         }
     }
 
