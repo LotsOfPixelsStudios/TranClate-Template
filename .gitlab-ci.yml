@@ -22,6 +22,8 @@ run:
     reports:
       # To ensure we've access to this file in the next stage
       dotenv: generate_executables.env
+  only:
+    - tags
 
 mcworld:
   stage: mcworld
@@ -49,4 +51,4 @@ mcworld:
           url: 'https://git.timoliacreative.de/crackedcubes/${CI_PROJECT_NAME}/-/jobs/${GE_JOB_ID}/artifacts/file/zipVersions/${CI_PROJECT_NAME}.zip'
   only:
     # Can be removed if you want to trigger the pipeline for merge request or other branches
-    - master
+    - tags
