@@ -39,10 +39,10 @@ mcworld:
     - job: run
       artifacts: true
   release:
-    name: 'Release McWorld $CI_COMMIT_SHORT_SHA'
+    name: 'Release McWorld $CI_COMMIT_REF_NAME'
     description: 'Created using the release-cli'
     # tag_name is a mendatory field and can not be an empty string
-    tag_name: '$CI_COMMIT_SHORT_SHA'
+    tag_name: '$CI_COMMIT_REF_NAME'
     assets:
       links:
         - name: 'McWorld'

@@ -11,6 +11,10 @@ val localEnvFile = File(
 if (localEnvFile.exists()) {
     //set project extras
     apply(from = localEnvFile.path)
+} else {
+    project.extra.set("maven_repo_url", System.getenv("MAVEN_URL") as String)
+    project.extra.set("maven_repo_user", System.getenv("MAVEN_USER") as String)
+    project.extra.set("maven_repo_pw", System.getenv("MAVEN_PW") as String)
 }
 
 group = "com.timoliacreative"
