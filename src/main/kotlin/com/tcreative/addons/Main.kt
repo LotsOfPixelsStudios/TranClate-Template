@@ -24,18 +24,16 @@ fun main(args: Array<String>) {
     // [ ] replace or remove sample entity
     // [ ] replace or remove sample item
     // [ ] replace or remove sample system
-    // [ ] modify or remove zipProject
-    // [ ] modify packageAddon()
     //---------------------------------------------------------------
 
-    val properties = addon(
-        projectName = "Template",
-        projectShort = "tp",
-        description = "",
-        packIcon = getResource("general/pack.png"),
-        world = getResource("world/template-world").modifyTemplateWorldName("Template"),
-        version = arrayListOf(1, 0, 0)
-    ) {
+    val properties = addon({
+        projectName = "Template"
+        projectShort = "tp"
+        description = ""
+        packIcon = getResource("general/pack.png")
+        world = getResource("world/template-world").modifyTemplateWorldName("Template")
+        version = arrayListOf(0, 0, 1)
+    }) {
         if (args.contains("package")) {
             packageAddonCustom {
                 this.world = getResource("world/template-world")
