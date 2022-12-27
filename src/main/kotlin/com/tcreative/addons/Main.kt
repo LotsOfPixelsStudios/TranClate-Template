@@ -5,6 +5,7 @@ import com.tcreative.devtools.stdlib.cameratrack.cameraTracks
 import com.tcreative.devtools.stdlib.commands.Selector
 import com.tcreative.devtools.stdlib.furnitures.furniture
 import com.tcreative.devtools.stdlib.furnitures.shared.FurnitureDropBehaviour
+import com.tcreative.devtools.stdlib.packaging.packaging
 import com.tcreative.devtools.stdlib.player.Player
 import com.tcreative.devtools.stdlib.statesys.stateSystem
 import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
@@ -35,7 +36,7 @@ fun main(args: Array<String>) {
         version = arrayListOf(0, 0, 1)
     }) {
         if (args.contains("package")) {
-            packageAddonCustom {
+            packaging {
                 this.world = getResource("world/template-world")
                 addSkinPack(validate = true, getResource("skin_pack"))
                 addStoreArt { }
