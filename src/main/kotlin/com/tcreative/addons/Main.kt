@@ -5,6 +5,8 @@ import com.tcreative.devtools.stdlib.cameratrack.cameraTracks
 import com.tcreative.devtools.stdlib.commands.Selector
 import com.tcreative.devtools.stdlib.furnitures.furniture
 import com.tcreative.devtools.stdlib.furnitures.shared.FurnitureDropBehaviour
+import com.tcreative.devtools.stdlib.npcs.npc
+import com.tcreative.devtools.stdlib.packaging.packaging
 import com.tcreative.devtools.stdlib.player.Player
 import com.tcreative.devtools.stdlib.statesys.stateSystem
 import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
@@ -15,7 +17,7 @@ import com.tcreative.devtools.tranclate.systemaddon.addon
 fun main(args: Array<String>) {
     //todo
     //---------------------------------------------------------------
-    // [ ] make sure to modify addon() to loadAddon() if some json code already exist
+    // [ ] make sure to modify addon() to lazyAddon() if some json code already exist
     // [ ] replace ProjectName, in addon & settings.gradle.kts
     // [ ] replace ProjectShort
     // [ ] replace or remove description
@@ -35,9 +37,12 @@ fun main(args: Array<String>) {
         version = arrayListOf(0, 0, 1)
     }) {
         if (args.contains("package")) {
-            packageAddonCustom {
+            packaging {
                 this.world = getResource("world/template-world")
-                addSkinPack(validate = true, getResource("skin_pack"))
+                addSkinPack {
+                    addSkin(getResource("skin_pack/alex_a.png"), true)
+                    addSkin(getResource("skin_pack/steve_s.png"), true)
+                }
                 addStoreArt { }
                 addMarketing { }
                 addBehaviorPack { }
@@ -55,6 +60,17 @@ fun main(args: Array<String>) {
                 components {
                     physics { }
                 }
+
+                cameraTracks(this@addon) {
+                    addSharedAnimation(
+                        trackAsAnimation(
+                            "a_to_b", values = arrayListOf(
+                                Pair(Coordinate(0f, -50f, 0f, 0f, 0f), 0f),
+                                Pair(Coordinate(10f, -50f, 0f, 20f, 0f), 5f)
+                            ), Selector.p.toString()
+                        )
+                    )
+                }
             }
         }
         item {
@@ -68,24 +84,16 @@ fun main(args: Array<String>) {
 
             }
         }
-        cameraTracks(this) {
-            addCameraTrack {
-                identifier = "a_to_b"
-                values = arrayListOf(
-                    Pair(Coordinate(0f, -50f, 0f, 0f, 0f), 0f),
-                    Pair(Coordinate(10f, -50f, 0f, 20f, 0f), 5f)
-                )
-                selector = Selector.a.toString()
-                exitOnJumpOrCrouch = true
-                onExit = arrayListOf("/function exit_fun")
-            }
-        }
         Player
             .modify(this)
             .modifyBehaviour { }
 
         furniture("vase", "Vase", this) {
             dropBehaviour = FurnitureDropBehaviour.CAN_PICKUP
+        }
+
+        npc("my_npc", "My NPC", this) {
+            //...
         }
     }
 
