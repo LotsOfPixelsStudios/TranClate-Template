@@ -55,7 +55,7 @@ application {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation(group = "com.timoliacreative", name = "tranclate", version = "2.9-dev2")
+    implementation(group = "com.timoliacreative", name = "tranclate", version = "2.9-dev3")
     implementation(group = "com.timoliacreative", name = "tranclate-std-lib", version = "0.9.0-dev10")
 
     //test
