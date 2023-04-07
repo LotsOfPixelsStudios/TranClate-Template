@@ -13,7 +13,6 @@ if (localEnvFile.exists()) {
     apply(from = localEnvFile.path)
 } else {
     //gitlab project that has access to the repo
-    project.extra.set("gitlab_user", "Job-Token")
     project.extra.set("gitlab_token", System.getenv("CI_JOB_TOKEN") as String)
 }
 
@@ -21,19 +20,12 @@ group = "com.timoliacreative"
 version = "1"
 
 fun MavenArtifactRepository.authTcGitlab() {
-    if (localEnvFile.exists()) {
-        credentials {
-            username = project.extra["gitlab_user"] as String
-            password = project.extra["gitlab_token"] as String
-        }
-    } else {
-        credentials(HttpHeaderCredentials::class) {
-            name = project.extra["gitlab_user"] as String
-            value = project.extra["gitlab_token"] as String
-        }
-        authentication {
-            create<HttpHeaderAuthentication>("header")
-        }
+    credentials(HttpHeaderCredentials::class) {
+        name = if (localEnvFile.exists()) "Private-Token" else "Job-Token"
+        value = project.extra["gitlab_token"] as String
+    }
+    authentication {
+        create<HttpHeaderAuthentication>("header")
     }
 }
 
@@ -55,8 +47,8 @@ application {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation(group = "com.timoliacreative", name = "tranclate", version = "2.9-dev3")
-    implementation(group = "com.timoliacreative", name = "tranclate-std-lib", version = "0.9.0-dev10")
+    implementation("com.timoliacreative:tranclate:2.9-dev3")
+    implementation("com.timoliacreative:tranclate-std-lib:0.9.0-dev10")
 
     //test
     testImplementation(kotlin("test"))
