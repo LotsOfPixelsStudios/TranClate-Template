@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.7.20"
+    kotlin("jvm") version "1.8.21"
     id("application")
 }
 
@@ -47,8 +47,8 @@ application {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
-    implementation("com.timoliacreative:tranclate:2.9-dev3")
-    implementation("com.timoliacreative:tranclate-std-lib:0.9.0-dev10")
+    implementation("com.timoliacreative:tranclate:2.11-dev1")
+    implementation("com.timoliacreative:tranclate-std-lib:0.9.4")
 
     //test
     testImplementation(kotlin("test"))

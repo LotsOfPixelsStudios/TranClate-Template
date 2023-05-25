@@ -35,6 +35,7 @@ fun main(args: Array<String>) {
         packIcon = getResource("general/pack.png")
         world = getResource("world/template-world").modifyTemplateWorldName("Template")
         version = arrayListOf(0, 0, 1)
+        targetMcVersion = arrayListOf(1, 19, 81)
     }) {
         if (args.contains("package")) {
             packaging {
