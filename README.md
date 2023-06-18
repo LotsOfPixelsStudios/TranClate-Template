@@ -10,8 +10,10 @@ The wiki can be also found [here](https://timoliacreative.github.io/#/) on GitHu
 
 ## Scripting
 
-Run the following commands in a terminal:
+Make sure [Node](https://nodejs.org/) is installed on you're system, to check run the following commands in a terminal:
 
-- `cd scripting`
-- `npm i`
-- `npm run build` if you are using typescript (recommended)
+````shell
+cd scripting
+npm i
+npm run build
+````
