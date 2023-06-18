@@ -8,3 +8,6 @@ output
 ScriptingComponents
 
 zipVersions
+
+scripting/dist
+scripting/node_modules
