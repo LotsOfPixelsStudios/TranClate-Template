@@ -14,6 +14,7 @@ import com.tcreative.devtools.tranclate.builder.File
 import com.tcreative.devtools.tranclate.builder.getResource
 import com.tcreative.devtools.tranclate.builder.zipper.zipWorld
 import com.tcreative.devtools.tranclate.systemaddon.addon
+import java.util.concurrent.TimeUnit
 
 fun main(args: Array<String>) {
     //todo
@@ -30,6 +31,8 @@ fun main(args: Array<String>) {
     //---------------------------------------------------------------
 
     val properties = addon({
+        "npm.cmd run build".runCommand(File(System.getProperty("user.dir"), "scripting"))
+
         projectName = "Template"
         projectShort = "tp"
         description = ""
