@@ -10,6 +10,7 @@ import com.tcreative.devtools.stdlib.packaging.packaging
 import com.tcreative.devtools.stdlib.player.Player
 import com.tcreative.devtools.stdlib.statesys.stateSystem
 import com.tcreative.devtools.stdlib.templateworld.modifyTemplateWorldName
+import com.tcreative.devtools.tranclate.builder.File
 import com.tcreative.devtools.tranclate.builder.getResource
 import com.tcreative.devtools.tranclate.builder.zipper.zipWorld
 import com.tcreative.devtools.tranclate.systemaddon.addon
@@ -36,7 +37,10 @@ fun main(args: Array<String>) {
         world = getResource("world/template-world").modifyTemplateWorldName("Template")
         version = arrayListOf(0, 0, 1)
         targetMcVersion = arrayListOf(1, 20, 0)
+        scriptEntryFile = File("scripting", "dist", "src", "index.js")
     }) {
+        scripts(directory = File("scripting", "dist", "src"))
+
         if (args.contains("package")) {
             packaging {
                 this.world = getResource("world/template-world")
